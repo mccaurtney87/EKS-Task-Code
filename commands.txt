@@ -1,0 +1,6 @@
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
+kubectl -n kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+ helm init --service-account tiller
+  helm  install  stable/prometheus  -n  prometheus  --set alertmanager.persistentVolume.storageClass="aws-efs" --set server.persistentVolume.storageClass="aws-efs" 
